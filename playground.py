@@ -1,12 +1,8 @@
-import numpy as np
+from evaluation import *
+from matplotlib import pyplot as plt
 
 
-a = np.array([[1, 4],
-       [2, 5],
-       [3, 6]])
-
-b = np.array([1, 2, 3])
-
-print(np.vstack((a.T, b)).T)
-
-
+h = [1, 3, 5]
+f = [2, 4, 6]
+plt.bar(h, f)
+plt.show()

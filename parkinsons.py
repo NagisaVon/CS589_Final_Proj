@@ -12,7 +12,7 @@ parkinsons_attr_type = ["numerical","numerical","numerical","numerical","numeric
         "numerical","numerical","numerical","numerical","numerical",
         "numerical","numerical","numerical","numerical","numerical","numerical","numerical","class"]
 parkinsons_attr_dict = build_attribute_dict(parkinsons_attr, parkinsons_attr_type)
-parkinsons_attr_options = get_possible_options(parkinsons_data, parkinsons_attr, parkinsons_attr_type)
+parkinsons_attr_options = get_possible_options(parkinsons_data, parkinsons_attr_type)
 parkinsons_class_col = -1
 
 

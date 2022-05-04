@@ -20,9 +20,9 @@ def load_data(cvsfilename, csv_delimiter=','):
 
 # if the attribute is categorical, return a list of all possible options
 # if the attribute is numerical, return a list mid-point
-def get_possible_options(data, attr, attr_type):
+def get_possible_options(data, attr_type):
     options = []
-    for i in range(len(attr)):
+    for i in range(len(attr_type)):
         opt = []
         if attr_type[i] == "numerical":
             # opt = [0, 1] # 0: <=, 1: >
