@@ -31,3 +31,19 @@ n = 0
 for layer in listoflayers:
     savef(loan_rawdata,loan_rawcategory,layer,epochp_1+1500*n,filenames[n])
     n+=1
+
+# Loan Data Neural Network with [4] hidden layers and 4000 epochs
+# Accuracy: 0.8016
+# F-score: 0.8713
+
+# Loan Data Neural Network with [8] hidden layers and 5500 epochs
+# Accuracy: 0.7934
+# F-score: 0.8653
+
+# Loan Data Neural Network with [8, 8] hidden layers and 7000 epochs
+# Accuracy: 0.7898
+# F-score: 0.8613
+
+# Loan Data Neural Network with [8, 8, 8] hidden layers and 8500 epochs
+# Accuracy: 0.7606
+# F-score: 0.8401
