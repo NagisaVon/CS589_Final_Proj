@@ -20,7 +20,7 @@ def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
     plt.xlabel("epoch")
     plt.ylabel("J")
     plt.title("Titanic Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
-    plt.savefig("nnfig/parkinson_nn_{}.png".format(filename))
+    plt.savefig("nnfig/titanic_nn_{}.png".format(filename))
 
 
 filenames = ['4','8','88','888']
