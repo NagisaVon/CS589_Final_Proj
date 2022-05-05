@@ -6,9 +6,9 @@ digits_rawcategory, digits_rawdata = digits_dataforharry()
 hidden1 = [4]
 hidden2 = [8]
 hidden3 = [8,8]
-hidden4 = [8,8,8]
-listoflayers = [hidden1,hidden2,hidden3,hidden4]
-epochp_1 = 4000
+
+listoflayers = [hidden1,hidden2,hidden3]
+epochp_1 = 2000
 
 def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
     loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=10,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
@@ -24,7 +24,7 @@ def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
     plt.savefig("nnfig/digitsc_nn_{}.png".format(filename))
 
 
-filenames = ['4','8','88','888']
+filenames = ['4','8','88']
 
 n = 0
 for layer in listoflayers:
@@ -32,3 +32,6 @@ for layer in listoflayers:
     n+=1
 
 
+# Digits Data Neural Network with [4] hidden layers and 2000 epochs
+# Accuracy: 0.8609
+# F-score: 0.7596
