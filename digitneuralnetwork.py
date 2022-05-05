@@ -11,7 +11,7 @@ listoflayers = [hidden1,hidden2,hidden3,hidden4]
 epochp_1 = 4000
 
 def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
-    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=8,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
+    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=10,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
     accuracyp, precisionp, recallp, fscore_p= meanevaluation(loflofoutputs,1)
     plt.figure()
     print("Digits Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
