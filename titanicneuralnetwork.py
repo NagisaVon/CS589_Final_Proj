@@ -8,10 +8,10 @@ hidden2 = [8]
 hidden3 = [8,8]
 hidden4 = [8,8,8]
 listoflayers = [hidden1,hidden2,hidden3,hidden4]
-epochp_1 = 4000
+epochp_1 = 2000
 
 def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
-    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=8,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
+    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=8,lambda_reg=0.1, learning_rate=0.01, epsilon_0=0.00001, softstop=epoch, printq=False)
     accuracyp, precisionp, recallp, fscore_p= meanevaluation(loflofoutputs,1)
     plt.figure()
     print("Titanic Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
@@ -31,6 +31,8 @@ for layer in listoflayers:
     savef(titan_rawdata,titan_rawcategory,layer,epochp_1+1000*n,filenames[n])
     n+=1
 
-
+# Titanic Data Neural Network with [4] hidden layers and 4000 epochs
+# Accuracy: 0.8309
+# F-score: 0.7617
 
 
