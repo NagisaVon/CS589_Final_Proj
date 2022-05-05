@@ -15,4 +15,6 @@ parkinsons_attr_dict = build_attribute_dict(parkinsons_attr, parkinsons_attr_typ
 parkinsons_attr_options = get_possible_options(parkinsons_data, parkinsons_attr_type)
 parkinsons_class_col = -1
 
+def dataforharry():
+        return parkinsons_attr_dict, parkinsons_data
 
