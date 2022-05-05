@@ -34,4 +34,10 @@ for layer in listoflayers:
 # Accuracy: 0.857(251461988304)
 # F-score: 0.909(2946287120369)
 
+# Parkinson Data Neural Network with [4, 4] hidden layers and 5000 epochs
+# Accuracy: 0.857(6959064327484)
+# F-score: 0.9095533250546992
 
+# Parkinson Data Neural Network with [8] hidden layers and 6000 epochs
+# Accuracy: 0.8608771929824561
+# F-score: 0.9121042018789517
