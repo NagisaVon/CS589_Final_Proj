@@ -1,5 +1,4 @@
 from utils import *
-from run import *
 from neuralnetwork import *
 from evaluationmatrix import *
 
