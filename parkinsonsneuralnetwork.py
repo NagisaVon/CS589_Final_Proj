@@ -1,23 +1,31 @@
+from numpy import save
 from stratified import *
 from parkinsons import *
 
 raw_category_p, raw_data_p = dataforharry()
-hiddenlayerp_1 = [4]
-hiddenlayerp_2 = [4,4]
-epochp_1 = 1000
+hidden1 = [4]
+hidden2 = [4,4]
+hidden3 = [8]
+hidden4 = [8,8]
+listoflayers = [hidden1,hidden2,hidden3,hidden4]
+epochp_1 = 5000
 
-loflofoutputsp_1, accp_1, lofjlistp_1 = kfoldcrossvalidneuralnetwork(raw_data_p,raw_category_p,hiddenlayerp_1,k=4,minibatchk=5,lambda_reg=0.1, learning_rate=0.1, epsilon_0=0.00001, softstop=epochp_1, printq=False)
+def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
+    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=5,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
+    accuracyp, precisionp, recallp, fscore_p= meanevaluation(loflofoutputs,1)
+    print("First House Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
+    print("Accuracy:", acc)
+    print("F-score:", fscore_p)
+    plt.plot(range(epoch+1), lofj[1])
+    plt.xlabel("epoch")
+    plt.ylabel("J")
+    plt.title("First House Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
+    plt.savefig("nnfig/parkinson_nn_{}.png".format(filename))
 
-accuarcyp_1, precisionp_1, recallp_1, fscore_p_1= meanevaluation(loflofoutputsp_1,1)
-print("First House Data Neural Network with " + str(hiddenlayerp_1) + " hidden layers and " + str(epochp_1) + " epochs")
-print("Accuracy:", accp_1)
-print("F-score:", fscore_p_1)
-accprint = 'Accuracy is ' + str( float("{0:.3f}". format(accp_1)))
-fscprint = 'F-Score is ' + str( float("{0:.3f}". format(fscore_p_1)))
-plt.plot(range(epochp_1+1), lofjlistp_1[1])
-plt.xlabel("epoch")
-plt.ylabel("J")
-plt.title("First House Data Neural Network with " + str(hiddenlayerp_1) + " hidden layers and " + str(epochp_1) + " epochs")
-# plt.axis([0,10,0,10])
-# plt.text(0.95,0.01,accprint,fontsize=10)
-plt.show()
+
+filenames = ['4','44','8','88']
+
+n = 0
+for layer in listoflayers:
+    savef(raw_data_p,raw_category_p,layer,epochp_1,filenames[n])
+    n+=1
