@@ -61,4 +61,7 @@ def tune_n_tree(list_of_n):
 
 
 if (__name__) == "__main__":
-    tune_n_tree([1, 5, 10, 20, 30, 40, 50])
+    # tune_n_tree([1, 5, 10, 20, 30, 40, 50]) # pick n=30, accuracy: 0.852  precision: 0.818  recall: 0.794  f1: 0.806 
+
+
+    
