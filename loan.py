@@ -4,7 +4,6 @@
 # Algorithm: Random Forest/NN
 # the class attribute = [Y, N]
 
-from sklearn import datasets
 from evaluation import print_report
 from load_data import *
 import numpy as np
@@ -22,6 +21,10 @@ loan_data, loan_attr = load_data_category_string("datasets/loan.csv", loan_attr_
 loan_attr_dict = build_attribute_dict(loan_attr, loan_attr_type)
 loan_attr_options = get_possible_options(loan_data, loan_attr_type)
 loan_class_col = -1
+
+
+def loan_dataforharry():
+        return loan_attr_dict, loan_data
 
 
 def tune_n_tree(list_of_n):
