@@ -39,3 +39,6 @@ for layer in listoflayers:
 # Accuracy: 0.8186
 # F-score: 0.8581
 
+# Titanic Data Neural Network with [8, 8] hidden layers and 6000 epochs
+# Accuracy: 0.8321
+# F-score: 0.8676
