@@ -13,6 +13,7 @@ epochp_1 = 4000
 def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
     loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=8,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
     accuracyp, precisionp, recallp, fscore_p= meanevaluation(loflofoutputs,1)
+    plt.figure()
     print("Titanic Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
     print("Accuracy:",  float("{0:.4f}". format(acc)))
     print("F-score:",  float("{0:.4f}". format(fscore_p)))
