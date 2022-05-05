@@ -18,6 +18,7 @@ digits_data = np.vstack((digits['data'].T, digits['target'])).T
 digits_attr = digits['feature_names'] + ['class']
 digits_attr_type = ["numerical"] * 64 + ["class"]
 digits_attr_options = get_possible_options(digits_data, digits_attr_type)
+digits_attr_dict = build_attribute_dict(digits_attr, digits_attr_type)
 digits_class_col = -1
 
 
@@ -210,4 +211,3 @@ if __name__ == "__main__":
     # gini: accuracy: 0.924  precision: 0.931  recall: 0.924  f1: 0.923
     # digits_rf_final()  # accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
     tune_knn_k(list(range(1, 20))) # picked k = 3 accuracy: 0.978  precision: 0.980  recall: 0.978  f1: 0.978
-    
