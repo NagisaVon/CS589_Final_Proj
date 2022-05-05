@@ -29,9 +29,19 @@ def build_report(confusion_matrix, total_entry, class_list, binary_class):
         tp = confusion_matrix[i][i]
         all_p = sum(confusion_matrix[i][j] for j in range(len(confusion_matrix)))
         fn = sum(confusion_matrix[j][i] for j in range(len(confusion_matrix)) if j != i)
-        precisions.append(tp/all_p)
-        recalls.append(tp/(tp+fn))
-        f1s.append(2*precisions[i]*recalls[i]/(precisions[i]+recalls[i]))
+        if all_p == 0:
+            precisions.append(0)
+        else:
+            precisions.append(tp/all_p)
+        if tp + fn == 0:
+            recalls.append(0)
+        else:
+            recalls.append(tp/(tp+fn))
+        # divide by zero error
+        if (precisions[i]+recalls[i]) == 0:
+            f1s.append(0)
+        else:
+            f1s.append(2*precisions[i]*recalls[i]/(precisions[i]+recalls[i]))
     if binary_class:
         return [acc, precisions[1], recalls[1], f1s[1]]
     precision = mean(precisions)

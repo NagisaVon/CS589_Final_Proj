@@ -22,6 +22,11 @@ digits_attr_dict = build_attribute_dict(digits_attr, digits_attr_type)
 digits_class_col = -1
 
 
+def digits_dataforharry():
+        return digits_attr_dict, digits_data
+
+
+
 def tune_n_tree(list_of_n):
     reports = []
     for n in list_of_n:

@@ -5,10 +5,6 @@
 # the class attribute = [0, 1]
 
 
-
-
-
-from sklearn import datasets
 from evaluation import print_report
 from load_data import *
 import numpy as np
@@ -26,6 +22,9 @@ titanic_data, titanic_attr = load_data_category_string("datasets/titanic.csv", t
 titanic_attr_dict = build_attribute_dict(titanic_attr, titanic_attr_type)
 titanic_attr_options = get_possible_options(titanic_data, titanic_attr_type)
 titanic_class_col = 0
+
+def titanic_dataforharry():
+        return titanic_attr_dict, titanic_data
 
 def tune_n_tree(list_of_n):
     reports = []
@@ -61,7 +60,6 @@ def tune_n_tree(list_of_n):
 
 
 if (__name__) == "__main__":
-    # tune_n_tree([1, 5, 10, 20, 30, 40, 50]) # pick n=30, accuracy: 0.852  precision: 0.818  recall: 0.794  f1: 0.806 
+    tune_n_tree([1, 5, 10, 20, 30, 40, 50]) # pick n=30, accuracy: 0.852  precision: 0.818  recall: 0.794  f1: 0.806 
 
 
-    
