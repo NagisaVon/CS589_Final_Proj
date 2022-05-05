@@ -65,7 +65,7 @@ def normalizetrain(ohe_traindata, category): # input data in by row/by instance
             singleminmax = [colmin,colmax]
             # normalize to 0 to 1
             for j in range(len(dataTC[i])):
-                dataTC[i][j] = (dataTC[i][j] - colmin)/(colmax - colmin)
+                dataTC[i][j] = (dataTC[i][j] - colmin)/(colmax - colmin) if (colmax - colmin)!= 0 else 0
             minmaxes.append(singleminmax)
         else:
             minmaxes.append([0.0,1.0])
@@ -76,7 +76,7 @@ def normalizeonetest(instance_data, category, minmaxes):
     i = 0
     for oneattribute in category:
         if category[oneattribute] == 'numerical':
-            instance_data[i] = (instance_data[i] - minmaxes[i][0])/(minmaxes[i][1] - minmaxes[i][0])
+            instance_data[i] = (instance_data[i] - minmaxes[i][0])/(minmaxes[i][1] - minmaxes[i][0]) if (minmaxes[i][1] - minmaxes[i][0])!= 0 else 0
         i += 1
     return instance_data
 
