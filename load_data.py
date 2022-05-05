@@ -21,7 +21,7 @@ def load_data(cvsfilename, csv_delimiter=','):
 
 
 # return a np.array of the data, and a list of the attribute names
-def load_data_category_string(cvsfilename, attr_type, csv_delimiter=',', dropID=False): 
+def load_data_category_string(cvsfilename, attr_type, csv_delimiter=',', dropID=False, nameToPrefix=False): 
     # import data, include encoding to ommit BOM  
     data = []
     with open(cvsfilename, 'r', encoding='utf-8-sig') as csvfile:
@@ -30,13 +30,18 @@ def load_data_category_string(cvsfilename, attr_type, csv_delimiter=',', dropID=
             if len(row) != 0: # skip empty lines
                 if dropID:
                     row = row[1:]
+                if nameToPrefix:
+                    row[2] = row[2].split()[0]
                 data.append(row)
+        
     # drop the attribute row from the list
     attributes = data.pop(0)
     data = np.array(data)
     for col in range(len(data.T)):
         if attr_type[col] == "categorical" or attr_type[col] == "class":
             possible_category = list(set(data.T[col]))
+            # if col == 2:
+            #     print(possible_category)
             encode_dict = { possible_category[i] : i for i in range(len(possible_category)) }
             # encode the data
             for row in range(len(data)):
