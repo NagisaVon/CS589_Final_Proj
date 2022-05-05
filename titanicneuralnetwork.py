@@ -2,7 +2,7 @@ from numpy import save
 from stratified import *
 from parkinsons import *
 
-raw_category_p, raw_data_p = dataforharry()
+titan_rawcategory, titan_rawdata = dataforharry()
 hidden1 = [4]
 hidden2 = [4,4]
 hidden3 = [8]
@@ -27,7 +27,7 @@ filenames = ['4','44','8','88']
 
 n = 0
 for layer in listoflayers:
-    savef(raw_data_p,raw_category_p,layer,epochp_1+1000*n,filenames[n])
+    savef(titan_rawdata,titan_rawcategory,layer,epochp_1+1000*n,filenames[n])
     n+=1
 
 # Parkinson Data Neural Network with [4] hidden layers and 4000 epochs
