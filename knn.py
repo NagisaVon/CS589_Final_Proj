@@ -1,5 +1,7 @@
-from math import sqrt
-from decision_tree import * 
+from collections import Counter
+import math
+import numpy as np
+import random
 from evaluation import *
 
 def create_bootstrap_replace(data, n_samples):
@@ -11,37 +13,37 @@ def create_bootstrap_replace(data, n_samples):
     return np.array(bootstrap_data + replace_data)
 
 
-def evaluate_random_forest(test, forest, tag_col, class_list, binary_class):
-    true_tags = test.T[tag_col]
+# return prediction 
+def brute_k_nearest_neighbor(k, data, point, dist_func): 
+    # take away labels for distance calculation
+    data_no_labels = [row[:-1] for row in data]
+    # calculate distances between point and all data points
+    dist = [dist_func(point, data_no_labels[i]) for i in range(len(data))]
+    # sort distances and store the indices of the k closest points
+    ind =  np.argsort(dist)[:k]
+    # labels of the k closest points
+    labels = [data[i][-1] for i in ind]
+    # return the prediction 
+    return Counter(labels).most_common()[0][0]
+
+
+# return the a report [accuracy, precision, recall, f1] 
+def eval_k_nearest_neighbor(k, train_set, test_set, tag_col, class_list, binary_class):
+    true_tags = test_set.T[tag_col]
     pred_tags = []
-    for row in test:
-        preds = []
-        for tree in forest:
-            preds.append(predict(row, tree))
-            # vote for the class
-        pred_tags.append(Counter(preds).most_common(1)[0][0])
+    for test_row in test_set:
+        # math.dist is euclidean distance
+        prediction = brute_k_nearest_neighbor(k, train_set, test_row[:-1], math.dist)
+        pred_tags.append(prediction)
     confusion_matrix = build_confusion_matrix(true_tags, pred_tags, class_list)
     report = build_report(confusion_matrix, len(true_tags), class_list, binary_class)
     return report
-    
-
-def dispatch_random_forest(train, test, attr, attr_type, attr_opt, tag_col, minimal_size_for_split, minimal_gain, maximal_depth, algo, n_trees, binary_class, bootstrap_percentage):
-    forest = []
-    # a list of index, without the index for the class column
-    attr_list = [i for i in range(len(attr)) if attr_type[i] != "class"]
-    only_m_attr = int(sqrt(len(attr_list)))
-    for _ in range(n_trees): # use _ since we don't use the loop value
-        train_bootstrap = create_bootstrap_replace(train, int(len(train)*bootstrap_percentage))
-        tree = build_decision_tree(train_bootstrap, attr_list, attr_type, attr_opt, tag_col, algo, minimal_size_for_split, minimal_gain, maximal_depth, only_m_attr)
-        forest.append(tree)
-    
-    eval_result = evaluate_random_forest(test, forest, tag_col, attr_opt[tag_col], binary_class)
-    return eval_result
 
 
-def dispatch_k_fold(data, attr, attr_type, attr_opt, tag_col, minimal_size_for_split=0, minimal_gain=0, maximal_depth=10000, algo="entropy", random_state=42, k_fold=10, n_trees=10, binary_class=False, bootstrap_percentage=0.9, debug=False):
+def dispatch_k_fold(data, attr, attr_type, attr_opt, tag_col, kNN_k, k_fold=10, binary_class=False, debug=False):
     if debug:
-        print("dispatching_random_forest_k_fold, setting: k: {}, n-tree: {}, algorithm: {}".format(k_fold, n_trees, algo))
+        print("dispatching_kNN_k_fold, setting: kNN_k: {}, k_fold: {}".format(kNN_k, k_fold))
+
     # k_fold_size = int(len(data) / k_fold)
     data_by_class = [] 
     for i in range(len(attr_opt[tag_col])):
@@ -70,8 +72,9 @@ def dispatch_k_fold(data, attr, attr_type, attr_opt, tag_col, minimal_size_for_s
                 train = np.vstack([train ,before_i])
             if (len(after_i) != 0):
                 train = np.vstack([train ,after_i])
+
         # print(len(train)+len(test)==len(data))
-        eval_result = dispatch_random_forest(train, test, attr, attr_type, attr_opt, tag_col, minimal_size_for_split, minimal_gain, maximal_depth, algo, n_trees, binary_class, bootstrap_percentage)
+        eval_result = eval_k_nearest_neighbor(kNN_k, train, test, tag_col, attr_opt[tag_col], binary_class)
         k_fold_eval.append(eval_result)
         if debug:
             print("finished {}-th fold".format(i))

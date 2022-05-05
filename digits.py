@@ -9,6 +9,7 @@ from load_data import *
 import numpy as np
 import random_forest as rf
 import decision_tree as dt
+import knn as knn
 from matplotlib import pyplot as plt
 
 
@@ -176,6 +177,25 @@ def digits_rf_final():
     print_report(rp)
 
 
+def tune_knn_k(list_of_k):
+    reports = []
+    for n in list_of_k:
+        rp = knn.dispatch_k_fold(digits_data, digits_attr, digits_attr_type, digits_attr_options, digits_class_col, n, k_fold=10, binary_class=False, debug=True)
+        print("k = {}".format(n))
+        print_report(rp)
+        reports.append(rp)
+    plt.plot(list_of_k, [r[0] for r in reports], label="accuracy")
+    plt.plot(list_of_k, [r[1] for r in reports], label="precision")
+    plt.plot(list_of_k, [r[2] for r in reports], label="recall")
+    plt.plot(list_of_k, [r[3] for r in reports], label="f1")
+    plt.xticks(list_of_k)
+    plt.xlabel("k value for kNN")   
+    plt.legend()
+    plt.title("Digits dataset, tune knn_k")
+    plt.savefig("output_fig/digits_tune_knn_k.png")
+    print_report(rp)
+
+
 if __name__ == "__main__":
     # tune random forest
     list_of_n = [1, 5, 10, 20, 30, 40, 50] 
@@ -189,4 +209,5 @@ if __name__ == "__main__":
     # entropy: accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
     # gini: accuracy: 0.924  precision: 0.931  recall: 0.924  f1: 0.923
     # digits_rf_final()  # accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
+    tune_knn_k(list(range(1, 20))) # picked k = 3 accuracy: 0.978  precision: 0.980  recall: 0.978  f1: 0.978
     
