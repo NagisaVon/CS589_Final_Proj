@@ -3,15 +3,13 @@ from stratified import *
 from digits import *
 
 digits_rawcategory, digits_rawdata = digits_dataforharry()
-hidden1 = [4]
-hidden2 = [8]
-hidden3 = [8,8]
+hidden1 = [2]
 
-listoflayers = [hidden1,hidden2,hidden3]
-epochp_1 = 2000
+listoflayers = [hidden1]
+epochp_1 = 1000
 
 def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
-    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=10,minibatchk=10,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
+    loflofoutputs, acc, lofj = kfoldcrossvalidneuralnetwork(rawdata,rawcategory,hiddenlayer,k=5,minibatchk=10,lambda_reg=0.1, learning_rate=0.05, epsilon_0=0.00001, softstop=epoch, printq=False)
     accuracyp, precisionp, recallp, fscore_p= meanevaluation(loflofoutputs,1)
     plt.figure()
     print("Digits Data Neural Network with " + str(hiddenlayer) + " hidden layers and " + str(epoch) + " epochs")
@@ -24,18 +22,14 @@ def savef(rawdata,rawcategory,hiddenlayer,epoch,filename):
     plt.savefig("nnfig/digitsc_nn_{}.png".format(filename))
 
 
-filenames = ['4','8','88']
+filenames = ['2']
 
 n = 0
 for layer in listoflayers:
     savef(digits_rawdata,digits_rawcategory,layer,epochp_1+1000*n,filenames[n])
     n+=1
 
-# Digits Data Neural Network with [2] hidden layers and 1000 epochs
-# Accuracy: 0.4325
-# F-score: 0.2483
 
 # Digits Data Neural Network with [4] hidden layers and 2000 epochs
 # Accuracy: 0.8609
 # F-score: 0.7596
-
