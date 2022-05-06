@@ -75,7 +75,7 @@ def tune_max_depth(list_of_max_depth):
             algo="entropy",  
             random_state=42, 
             k_fold=10,
-            n_trees=20,
+            n_trees=30,
             binary_class=False, 
             bootstrap_percentage=0.9,
             debug=True
@@ -104,11 +104,11 @@ def tune_bootstrap_percentage(list_of_bootstrap_percentage):
             digits_class_col, 
             minimal_size_for_split=0.,
             minimal_gain=0.,
-            maximal_depth=12,
+            maximal_depth=11,
             algo="entropy",  
             random_state=42, 
             k_fold=10,
-            n_trees=20,
+            n_trees=30,
             binary_class=False, 
             bootstrap_percentage=n,
             debug=True
@@ -136,11 +136,11 @@ def tune_algo():
             digits_class_col, 
             minimal_size_for_split=0.,
             minimal_gain=0.,
-            maximal_depth=12,
+            maximal_depth=11,
             algo="entropy",  
             random_state=42, 
             k_fold=10,
-            n_trees=20,
+            n_trees=30,
             binary_class=False, 
             bootstrap_percentage=0.8
         )
@@ -152,7 +152,7 @@ def tune_algo():
             digits_class_col, 
             minimal_size_for_split=0.,
             minimal_gain=0.,
-            maximal_depth=12,
+            maximal_depth=11,
             algo="gini",  
             random_state=42, 
             k_fold=10,
@@ -171,11 +171,11 @@ def digits_rf_final():
             digits_class_col, 
             minimal_size_for_split=0.,
             minimal_gain=0.,
-            maximal_depth=12,
+            maximal_depth=11,
             algo="entropy",  
             random_state=42, 
             k_fold=10,
-            n_trees=20,
+            n_trees=30,
             binary_class=False, 
             bootstrap_percentage=0.8,
         )
@@ -205,7 +205,7 @@ def tune_knn_k(list_of_k):
 if __name__ == "__main__":
     # tune random forest
     list_of_n = [1, 5, 10, 20, 30, 40, 50] 
-    tune_n_tree([20])  # picked n = 20
+    # tune_n_tree(list_of_n)  # picked n = 20
     # dt.dispatch_decision_tree(digits_data, digits_attr, digits_attr_type, digits_attr_options, digits_class_col, algo="entropy", minimal_size_for_split=0., minimal_gain=0., maximal_depth=10000,random_state=42, printTree=True)
     list_of_max_depth = [8, 9, 10, 11, 12, 13] # picked max_depth = 12
     # tune_max_depth(list_of_max_depth)
@@ -214,5 +214,5 @@ if __name__ == "__main__":
     # tune_algo() # picked entropy
     # entropy: accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
     # gini: accuracy: 0.924  precision: 0.931  recall: 0.924  f1: 0.923
-    # digits_rf_final()  # accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
+    digits_rf_final()  # accuracy: 0.945  precision: 0.950  recall: 0.945  f1: 0.944
     # tune_knn_k(list(range(1, 20))) # picked k = 3 accuracy: 0.978  precision: 0.980  recall: 0.978  f1: 0.978
