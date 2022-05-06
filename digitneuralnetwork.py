@@ -39,3 +39,6 @@ for layer in listoflayers:
 # Accuracy: 0.8609
 # F-score: 0.7596
 
+# Digits Data Neural Network with [8] hidden layers and 3000 epochs
+# Accuracy: 0.9611
+# F-score: 0.9309
