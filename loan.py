@@ -60,5 +60,5 @@ def tune_n_tree(list_of_n):
     plt.savefig("output_fig/loan_tune_n_tree.png")
 
 
-if (__name__) == "__main__":
-    # tune_n_tree([1, 5, 10, 20, 30, 40, 50]) # picked n-tree=30 accuracy: 0.785  precision: 0.804  recall: 0.916  f1: 0.855
+# if (__name__) == "__main__":
+#     # tune_n_tree([1, 5, 10, 20, 30, 40, 50]) # picked n-tree=30 accuracy: 0.785  precision: 0.804  recall: 0.916  f1: 0.855 
